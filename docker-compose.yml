@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  frontend:
+    image: react-app
+    container_name: react-frontend
+    build:
+      context: ./vchat_frontend    # Path to your React project folder
+    ports:
+      - "80:3000"            # Map the React app's port to the host
+    depends_on:
+      - backend
+
+  backend:
+    image: spring-boot-app
+    container_name: spring-backend
+    build:
+      context: ./vchat_backend       # Path to your Spring Boot project folder
+    ports:
+      - "8088:8088"           # Map the Spring Boot app's port to the host
+    # environment:
+    #   - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/your_database
+    # depends_on:
+    #   - db
+
+
