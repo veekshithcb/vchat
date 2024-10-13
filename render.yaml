@@ -7,7 +7,7 @@ services:
       context: ./vchat_frontend                      # Context directory for the frontend
     routes:
       - type: rewrite
-        name: /
+        name: frontend
         path: /
         destination: http://localhost:3000  # Adjust based on your React app's URL
     plan: free
@@ -21,8 +21,9 @@ services:
       context: ./vchat_backend                      # Context directory for the backend
     routes:
       - type: rewrite
-        name: /
-        path: /
+        name: backend
+        path: /api
         destination: http://localhost:8088  # Adjust based on your backend API URL
     plan: free
     autoDeploy: true
+
