@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: react-frontend
+    env: docker
+    docker:
+      buildCommand: |
+        cd ./vchat_frontend
+        docker build -t react-app .
+      publishCommand: |
+        docker run -p 80:3000 react-app
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /   # Optional: Adjust based on your app's health check endpoint
+    envVars: []  # Add any environment variables needed for the frontend
+
+  - type: web
+    name: spring-backend
+    env: docker
+    docker:
+      buildCommand: |
+        cd ./vchat_backend
+        docker build -t spring-boot-app .
+      publishCommand: |
+        docker run -p 8088:8088 spring-boot-app
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /actuator/health   # Adjust based on your app's health check endpoint
+    envVars: []  # Add any environment variables needed for the backend
